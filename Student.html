@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Spring Flowers School - Student Management</title>
+
+  <style>
+    :root{
+      --primary: #2b6cb0;
+      --muted: #6b7280;
+      --surface: #ffffff;
+      --bg: #f4f7fb;
+      --card-shadow: 0 10px 25px rgba(43,108,176,0.08);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: linear-gradient(180deg, #fbfdff 0%, var(--bg) 100%);
+      color:#0f1724;
+      line-height:1.45;
+    }
+
+    /* Header */
+    .site-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 22px;
+      background:var(--surface);
+      border-bottom:1px solid #e6edf8;
+      position:sticky;
+      top:0;
+      z-index:10;
+    }
+
+    .logo-area{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .school-logo{width:56px;height:56px}
+    .school-name h1{font-size:18px;margin:0}
+    .school-name .tag{font-size:12px;color:var(--muted);margin:2px 0 0}
+
+    /* Navigation */
+    .main-nav ul{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:flex;
+      gap:12px;
+    }
+    .main-nav a{
+      text-decoration:none;
+      color:var(--muted);
+      padding:8px 12px;
+      border-radius:8px;
+      font-weight:600;
+    }
+    .main-nav a.active,
+    .main-nav a:hover{
+      color:var(--primary);
+      background:rgba(43,108,176,0.06);
+    }
+
+    /* Main container */
+    .container{
+      max-width:1100px;
+      margin:28px auto;
+      padding:0 18px;
+    }
+
+    /* Welcome hero */
+    .welcome{
+      background: linear-gradient(90deg, rgba(43,108,176,0.06), rgba(43,108,176,0.02));
+      padding:28px;
+      border-radius:12px;
+      box-shadow:var(--card-shadow);
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .welcome h2{margin:0;font-size:26px}
+    .welcome p{margin:0;color:var(--muted)}
+
+    /* Buttons */
+    .btn{
+      font-weight:600;
+      border:0;
+      padding:10px 14px;
+      border-radius:10px;
+      cursor:pointer;
+      background:#ffffff;
+      box-shadow: 0 4px 10px rgba(12, 20, 46, 0.03);
+      transition:all 0.2s ease;
+    }
+    .btn.primary{background:var(--primary);color:#fff;box-shadow:none}
+    .btn:hover{transform:translateY(-1px)}
+
+    /* Students list */
+    .students-section, .about-section{
+      margin-top:18px;
+      padding:18px;
+      background:var(--surface);
+      border-radius:10px;
+      border:1px solid #eef6ff;
+    }
+    .students-list{margin:8px 0 0;padding-left:18px}
+    .students-list li{margin-bottom:8px;color:var(--muted);cursor:pointer}
+    .students-list li:hover{color:var(--primary);text-decoration:underline;}
+
+    /* Profile modal */
+    .profile-panel{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:100;
+    }
+    .profile-panel.active{display:flex;}
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.4);
+      z-index:99;
+    }
+
+    .profile-card{
+      background:var(--surface);
+      border-radius:12px;
+      width:92%;
+      max-width:720px;
+      z-index:100;
+      box-shadow: 0 20px 45px rgba(3,7,18,0.18);
+      position:relative;
+      padding:20px;
+      animation:fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn{
+      from{opacity:0;transform:scale(0.95)}
+      to{opacity:1;transform:scale(1)}
+    }
+
+    .close-btn{
+      position:absolute;
+      right:12px;
+      top:10px;
+      border:0;
+      background:transparent;
+      font-size:24px;
+      line-height:1;
+      cursor:pointer;
+      color:#555;
+    }
+
+    .profile-header h4{margin:0}
+    .subtitle{color:var(--muted);margin:4px 0 12px}
+
+    .profile-content{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:left;
+    }
+
+    .profile-img{
+      width:120px;
+      height:120px;
+      border-radius:50%;
+      object-fit:cover;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+      margin-bottom:16px;
+    }
+
+    .profile-row{
+      display:flex;
+      gap:10px;
+      padding:8px 0;
+      border-bottom:1px dashed #f1f7fb;
+      width:100%;
+    }
+    .profile-row .label{width:120px;color:var(--muted);font-weight:600}
+
+    .grades{width:100%;border-collapse:collapse;margin-top:8px}
+    .grades th, .grades td{padding:8px 10px;text-align:left;border-bottom:1px solid #f3f6fa}
+    .profile-footer{display:flex;justify-content:flex-end;margin-top:16px}
+
+    .site-footer{
+      margin:28px 0 50px;
+      text-align:center;
+      color:var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo-area">
+      <svg class="school-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+        <rect x="6" y="22" width="52" height="30" rx="3" ry="3" fill="#fff8e6" stroke="#2b6cb0" stroke-width="2"/>
+        <path d="M32 6 L8 22 H56 L32 6 Z" fill="#2b6cb0"/>
+        <circle cx="20" cy="34" r="2.6" fill="#2b6cb0"/>
+        <circle cx="44" cy="34" r="2.6" fill="#2b6cb0"/>
+      </svg>
+      <div class="school-name">
+        <h1>Spring Flowers School</h1>
+        <p class="tag">Student Management Portal</p>
+      </div>
+    </div>
+
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#students">Students</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="welcome">
+      <h2>Welcome to Spring Flowers School</h2>
+      <p>Manage and view student information with a clean, responsive interface.</p>
+    </section>
+
+    <section id="students" class="students-section">
+      <h3>Students</h3>
+      <p>Click on a student name to view their profile.</p>
+
+      <ul class="students-list">
+        <li data-student="asha">Asha Roy — Class 10 | Roll No. 12</li>
+        <li data-student="rohit">Rohit Verma — Class 9 | Roll No. 05</li>
+        <li data-student="priya">Priya S. — Class 11 | Roll No. 03</li>
+      </ul>
+    </section>
+
+    <section id="about" class="about-section">
+      <h3>About the Application</h3>
+      <p>This demo shows multiple student profiles with profile images using HTML, CSS, and JavaScript — all in one file.</p>
+    </section>
+  </main>
+
+  <!-- Student Profile Modal -->
+  <div id="profilePanel" class="profile-panel" role="dialog" aria-modal="true">
+    <div class="overlay" id="overlay"></div>
+    <div class="profile-card">
+      <button id="closeProfile" class="close-btn" aria-label="Close profile">&times;</button>
+      <header class="profile-header">
+        <h4>Student Profile</h4>
+        <p class="subtitle" id="studentNameSub"></p>
+      </header>
+
+      <div id="profileBody" class="profile-content"></div>
+
+      <footer class="profile-footer">
+        <button id="closeProfile2" class="btn">Close</button>
+      </footer>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Spring Flowers School — All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Student data
+    const students = {
+      asha: {
+        name: "Asha Roy",
+        class: "10",
+        roll: "12",
+        dob: "2009-05-17",
+        email: "asha.roy@example.com",
+        phone: "+91 98765 43210",
+        image: "background.jpg",
+        grades: { Mathematics: "A", Science: "A", English: "B+" }
+      },
+      rohit: {
+        name: "Rohit Verma",
+        class: "9",
+        roll: "05",
+        dob: "2010-08-22",
+        email: "",
+        phone: "+91 98765 67890",
+        image: "background.jpg",
+        grades: { Mathematics: "B+", Science: "A", English: "A" }
+      },
+      priya: {
+        name: "Priya S.",
+        class: "11",
+        roll: "03",
+        dob: "2008-11-12",
+        email: "priya.s@example.com",
+        phone: "+91 99876 54321",
+        image: "background.jpg",
+        grades: { Mathematics: "A+", Science: "A", English: "A+" }
+      }
+    };
+
+    const profilePanel = document.getElementById('profilePanel');
+    const overlay = document.getElementById('overlay');
+    const closeBtns = document.querySelectorAll('#closeProfile, #closeProfile2');
+    const profileBody = document.getElementById('profileBody');
+    const studentNameSub = document.getElementById('studentNameSub');
+
+    // Open student profile
+    document.querySelectorAll('.students-list li').forEach(li => {
+      li.addEventListener('click', () => {
+        const id = li.getAttribute('data-student');
+        const s = students[id];
+        if (s) {
+          studentNameSub.textContent = `Details for ${s.name}`;
+          profileBody.innerHTML = `
+            <img src="${s.image}" alt="${s.name}" class="profile-img" />
+            <div class="profile-row"><span class="label">Name:</span> <span>${s.name}</span></div>
+            <div class="profile-row"><span class="label">Class:</span> <span>${s.class}</span></div>
+            <div class="profile-row"><span class="label">Roll No.:</span> <span>${s.roll}</span></div>
+            <div class="profile-row"><span class="label">DOB:</span> <span>${s.dob}</span></div>
+            <div class="profile-row"><span class="label">Email:</span> <span>${s.email}</span></div>
+            <div class="profile-row"><span class="label">Phone:</span> <span>${s.phone}</span></div>
+            <h5>Academic Snapshot</h5>
+            <table class="grades">
+              <thead><tr><th>Subject</th><th>Grade</th></tr></thead>
+              <tbody>
+                ${Object.entries(s.grades).map(([sub, grade]) => `<tr><td>${sub}</td><td>${grade}</td></tr>`).join('')}
+              </tbody>
+            </table>
+          `;
+          profilePanel.classList.add('active');
+        }
+      });
+    });
+
+    // Close profile
+    function closeProfile() {
+      profilePanel.classList.remove('active');
+    }
+    closeBtns.forEach(btn => btn.addEventListener('click', closeProfile));
+    overlay.addEventListener('click', closeProfile);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeProfile(); });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

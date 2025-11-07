@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Spice & Curry Menu</title>
+</head>
+<body style="margin:0; min-height:100vh; font-family:'Poppins', sans-serif;
+             background:url('background.jpg') center/cover no-repeat fixed;
+             display:flex; align-items:center; justify-content:center; position:relative;">
+
+  <!-- Overlay for better readability -->
+  <div style="position:absolute; top:0; left:0; right:0; bottom:0;
+              background:rgba(0,0,0,0.5);"></div>
+
+  <div style="position:relative; width:90%; max-width:1000px; margin:32px; 
+              background:linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,245,230,0.95));
+              border-radius:20px; box-shadow:0 8px 40px rgba(0,0,0,0.6); 
+              padding:30px 32px; z-index:2;">
+
+    <!-- Header -->
+    <header style="text-align:center; margin-bottom:30px;">
+      <h1 style="margin:0; color:#7b1113; font-size:34px; letter-spacing:1px; text-transform:uppercase;">Spice & Curry</h1>
+      <p style="margin:6px 0 0; color:#444; font-size:15px; font-weight:500;">Authentic Indian Cuisine • Since 1995</p>
+      <div style="margin-top:8px; font-size:13px; color:#666;">Open Daily: 11:00 AM - 10:30 PM</div>
+    </header>
+
+    <!-- Menu Sections -->
+    <main style="display:flex; gap:24px; flex-wrap:wrap; justify-content:center;">
+
+      <!-- Starters -->
+      <section style="flex:1 1 300px; background:rgba(255,255,255,0.95); border-radius:16px;
+                      padding:18px; border:1px solid #eee; box-shadow:0 4px 10px rgba(0,0,0,0.1);
+                      transition:transform 0.3s, box-shadow 0.3s;">
+        <h2 style="margin:0 0 12px 0; color:#b71c1c; font-size:20px; text-align:center; border-bottom:2px solid #b71c1c; padding-bottom:6px;">Starters</h2>
+        <ul style="list-style:none; padding:0; margin:0; color:#333; font-size:15px;">
+          <li style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #ccc;">
+            <span>Paneer Tikka</span><strong>₹180</strong>
+          </li>
+          <li style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #ccc;">
+            <span>Vegetable Samosa</span><strong>₹100</strong>
+          </li>
+          <li style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #ccc;">
+            <span>Chicken Malai Tikka</span><strong>₹220</strong>
+          </li>
+          <li style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #ccc;">
+            <span>Hara Bhara Kebab</span><strong>₹150</strong>
+          </li>
+          <li style="display:flex; justify-content:space-between; padding:8px 0;">
+            <span>Aloo Tikki Chaat</span><strong>₹130</strong>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Main Course -->
+      <section style="flex:2 1 420px; background:rgba(255,255,255,0.95); border-radius:16px;
+                      padding:18px; border:1px solid #eee; box-shadow:0 4px 10px rgba(0,0,0,0.1);
+                      transition:transform 0.3s, box-shadow 0.3s;">
+        <h2 style="margin:0 0 12px 0; color:#b71c1c; font-size:20px; text-align:center; border-bottom:2px solid #b71c1c; padding-bottom:6px;">Main Course</h2>
+        <div style="display:flex; flex-direction:column; gap:12px; color:#333; font-size:15px;">
+          <div style="display:flex; justify-content:space-between; padding:10px; border-radius:10px; background:#fff9f2;
+                      border:1px solid #ddd; box-shadow:inset 0 1px 2px rgba(0,0,0,0.05);">
+            <div>
+              <div style="font-weight:700;">Butter Chicken</div>
+              <div style="font-size:13px; color:#666;">Tender chicken in creamy tomato gravy</div>
+            </div>
+            <div style="align-self:center; font-weight:700;">₹280</div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; padding:10px; border-radius:10px; background:#fff9f2;
+                      border:1px solid #ddd;">
+            <div>
+              <div style="font-weight:700;">Paneer Butter Masala</div>
+              <div style="font-size:13px; color:#666;">Paneer cooked in rich buttery gravy</div>
+            </div>
+            <div style="align-self:center; font-weight:700;">₹250</div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; padding:10px; border-radius:10px; background:#fff9f2;
+                      border:1px solid #ddd;">
+            <div>
+              <div style="font-weight:700;">Dal Makhani</div>
+              <div style="font-size:13px; color:#666;">Slow-cooked black lentils with cream & butter</div>
+            </div>
+            <div style="align-self:center; font-weight:700;">₹190</div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; padding:10px; border-radius:10px; background:#fff9f2;
+                      border:1px solid #ddd;">
+            <div>
+              <div style="font-weight:700;">Mutton Rogan Josh</div>
+              <div style="font-size:13px; color:#666;">Aromatic Kashmiri curry with tender lamb</div>
+            </div>
+            <div style="align-self:center; font-weight:700;">₹320</div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; padding:10px; border-radius:10px; background:#fff9f2;
+                      border:1px solid #ddd;">
+            <div>
+              <div style="font-weight:700;">Vegetable Biryani</div>
+              <div style="font-size:13px; color:#666;">Basmati rice with fresh seasonal vegetables</div>
+            </div>
+            <div style="align-self:center; font-weight:700;">₹220</div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; padding:10px; border-radius:10px; background:#fff9f2;
+                      border:1px solid #ddd;">
+            <div>
+              <div style="font-weight:700;">Chicken Biryani</div>
+              <div style="font-size:13px; color:#666;">Fragrant rice with marinated chicken</div>
+            </div>
+            <div style="align-self:center; font-weight:700;">₹260</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Desserts -->
+      <section style="flex:1 1 260px; background:rgba(255,255,255,0.95); border-radius:16px;
+                      padding:18px; border:1px solid #eee; box-shadow:0 4px 10px rgba(0,0,0,0.1);
+                      transition:transform 0.3s, box-shadow 0.3s;">
+        <h2 style="margin:0 0 12px 0; color:#b71c1c; font-size:20px; text-align:center; border-bottom:2px solid #b71c1c; padding-bottom:6px;">Desserts</h2>
+        <ul style="list-style:none; padding:0; margin:0; color:#333; font-size:15px;">
+          <li style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #ccc;">
+            <span>Gulab Jamun</span><strong>₹120</strong>
+          </li>
+          <li style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #ccc;">
+            <span>Rasmalai</span><strong>₹150</strong>
+          </li>
+          <li style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #ccc;">
+            <span>Kesar Kulfi</span><strong>₹130</strong>
+          </li>
+          <li style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #ccc;">
+            <span>Jalebi with Rabri</span><strong>₹160</strong>
+          </li>
+          <li style="display:flex; justify-content:space-between; padding:8px 0;">
+            <span>Carrot Halwa</span><strong>₹140</strong>
+          </li>
+        </ul>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer style="margin-top:28px; color:#555; font-size:13px; text-align:center;">
+      <p style="margin:0;">All prices in INR · Taxes extra · Ingredients subject to availability</p>
+    </footer>
+
+  </div>
+</body>
+</html>
